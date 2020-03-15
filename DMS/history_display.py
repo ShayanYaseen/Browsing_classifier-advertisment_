@@ -36,6 +36,16 @@ local_cur.execute("ATTACH DATABASE 'history' AS history;")
 local_cur.execute("CREATE TABLE IF NOT EXISTS url(id INTEGER PRIMARY KEY AUTOINCREMENT,url LONGVARCHAR,title LONGVARCHAR,visit_count INTEGER NOT NULL DEFAULT 0,last_visit_time INTEGER NOT NULL)")
 local_cur.execute("INSERT INTO url SELECT id,url,title,visit_count,last_visit_time FROM history.urls")
 
+print("**MENU**")
+print("Press 1 to get top 10 visited urls")
+print("Press 2 to exit")
+i = input("Enter Command- ")
+if i=='1':
+    print("1")
+    local_cur.execute("SELECT id,url,visit_count from url ORDER BY visit_count DESC LIMIT 10")
+    results = local_cur.fetchall()
+    for i in results:
+        print("Url id- ",i[0],"URL- ",i[1],"Visits- ",i[2])
 
 local_con.commit()
 local_con.close()
