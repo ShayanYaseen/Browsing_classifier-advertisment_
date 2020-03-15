@@ -10,7 +10,7 @@ local.execute("SELECT id,url, title,last_visit_time FROM url")
 results = local.fetchall()
 for r in range(len(results)):
     results[r] = list(results[r])
-    results[r].append(0)
+    # results[r].append(0)
     # print(results[r])
 
 #database to store clean data
@@ -36,16 +36,46 @@ last_visit_update = []
 for i in results:
     if i[0] in ids:
         if i[3]>time_stamp:
-            last_visit_update.append(tuple(i))
+            last_visit_update.append(i)
     else:
-        new_entries.append(tuple(i))
+        new_entries.append(i)
 # print(len(new_entries),new_entries[1:4])
 # print(len(last_visit_update))
 # print(last_visit_update,'\n', len(last_visit_update))
 
+
+curr_direct = str(pathlib.Path(__file__).parent.absolute()) # get name of current directory
+curr_direct = curr_direct[:-3]
+curr_direct += 'ML MODEL/Pickle_MNB_Model.pkl'
+
+# print(curr_direct)
+import pickle
+# import sklearn
+# Load the Model back from file
+with open(curr_direct, 'rb') as file:
+    Pickled_MNB_Model = pickle.load(file)
+
+# print(Pickled_LR_Model)
+
+# Use the Reloaded Model to
+# Calculate the accuracy score and predict target values
+
 for i in new_entries:
-    # print(i)
+    X_test = [i[2],]
+
+    # Predict the Labels using the reloaded Model
+    Y_pred = Pickled_MNB_Model.predict(X_test)
+    Y_pred = str(Y_pred[0])
+    i.append(Y_pred)
+    # print(Y_pred)
     ads_cur.execute('INSERT INTO title VALUES (?,?,?,?,?)',i)
+
+
+
+
+
+
+
 
 for i in last_visit_update:
     ads_cur.execute("SELECT * FROM title WHERE id=?", (i[0],))
