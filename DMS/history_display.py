@@ -3,6 +3,7 @@ import sqlite3
 import shutil
 import getpass
 import pathlib
+import pandas as pd
 #comment
 username = getpass.getuser()
 
@@ -35,6 +36,16 @@ local_cur.execute("DROP TABLE IF EXISTS url")
 local_cur.execute("ATTACH DATABASE 'history' AS history;")
 local_cur.execute("CREATE TABLE IF NOT EXISTS url(id INTEGER PRIMARY KEY AUTOINCREMENT,url LONGVARCHAR,title LONGVARCHAR,visit_count INTEGER NOT NULL DEFAULT 0,last_visit_time INTEGER NOT NULL)")
 local_cur.execute("INSERT INTO url SELECT id,url,title,visit_count,last_visit_time FROM history.urls")
+
+#storing data for web app
+db_df = pd.read_sql_query("SELECT * FROM url", local_con)
+db_df.to_html('data/history.htm', index=False)
+db_df = pd.read_sql_query("SELECT id,url,visit_count from url ORDER BY visit_count DESC LIMIT 10", local_con)
+db_df.to_html('data/visit.htm', index=False)
+ads = sqlite3.connect('ads')
+db_df = pd.read_sql_query("SELECT id,title,category FROM title", ads)
+db_df.to_html('data/ad.htm', index=False)
+ads.close()
 
 print("**MENU**")
 print("Press 1 to get top 10 visited urls")
