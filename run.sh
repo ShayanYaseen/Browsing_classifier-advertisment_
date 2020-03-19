@@ -1,8 +1,6 @@
 curr_path=$PWD
-history_script="/DMS/"
-history_script="$curr_path$history_script"
-web_app="/web-app/dashboard/"
-web_app="$curr_path$web_app"
+history_script="DMS/"
+web_app="web-app/dashboard/"
 
 pushd $history_script
 python3 history_display.py

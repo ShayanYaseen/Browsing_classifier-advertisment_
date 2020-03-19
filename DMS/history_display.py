@@ -20,7 +20,7 @@ dest = shutil.copyfile(source, destination)
 history_con = sqlite3.connect(destination)
 c = history_con.cursor()
 # Change this to your prefered queryresults = c.fetchall()
-c.execute("select url, title, visit_count, last_visit_time from urls")
+c.execute("select url, title, visit_count, datetime((last_visit_time/1000000)-11644473600, 'unixepoch', 'localtime') AS last_visit_time from urls")
 results = c.fetchall()
 # for r in results:
 #  print(r)
@@ -35,7 +35,7 @@ local_cur.execute("DROP TABLE IF EXISTS url")
 #extracting required table from the history db to our local db
 local_cur.execute("ATTACH DATABASE 'history' AS history;")
 local_cur.execute("CREATE TABLE IF NOT EXISTS url(id INTEGER PRIMARY KEY AUTOINCREMENT,url LONGVARCHAR,title LONGVARCHAR,visit_count INTEGER NOT NULL DEFAULT 0,last_visit_time INTEGER NOT NULL)")
-local_cur.execute("INSERT INTO url SELECT id,url,title,visit_count,last_visit_time FROM history.urls")
+local_cur.execute("INSERT INTO url SELECT id,url,title,visit_count,datetime((last_visit_time/1000000)-11644473600, 'unixepoch', 'localtime') AS last_visit_time FROM history.urls")
 
 web_dest = curr_direct[:-3] + "/web-app/dashboard/static/data/"
 
