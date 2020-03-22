@@ -40,27 +40,15 @@ local_cur.execute("INSERT INTO url SELECT id,url,title,visit_count,datetime((las
 web_dest = curr_direct[:-3] + "/web-app/dashboard/static/data/"
 
 #storing data for web app
-db_df = pd.read_sql_query("SELECT * FROM url", local_con)
+db_df = pd.read_sql_query("SELECT * FROM url ORDER BY last_visit_time DESC", local_con)
 db_df.to_html(web_dest+'history.htm', index=False)
 db_df = pd.read_sql_query("SELECT id,url,visit_count from url ORDER BY visit_count DESC LIMIT 10", local_con)
 db_df.to_html(web_dest+'visit.htm', index=False)
 ads = sqlite3.connect('ads')
-db_df = pd.read_sql_query("SELECT id,title,category FROM title", ads)
+db_df = pd.read_sql_query("SELECT id,url,title,category FROM title", ads)
 db_df.to_html(web_dest+'ad.htm', index=False)
 ads.close()
 
-'''
-print("**MENU**")
-print("Press 1 to get top 10 visited urls")
-print("Press 2 to exit")
-i = input("Enter Command- ")
-if i=='1':
-    print("1")
-    local_cur.execute("SELECT id,url,visit_count from url ORDER BY visit_count DESC LIMIT 10")
-    results = local_cur.fetchall()
-    for i in results:
-        print("Url id- ",i[0],"URL- ",i[1],"Visits- ",i[2])
-'''
 
 local_con.commit()
 local_con.close()
