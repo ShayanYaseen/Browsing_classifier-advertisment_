@@ -27,5 +27,5 @@ def visit(request):
     return render(request, 'charts/visit.html', {'title': 'visit'})
 
 
-def time(request):
-    return render(request, 'charts/time.html', {'title': 'time'})
+def productive(request):
+    return render(request, 'charts/productive.html', {'title': 'productive'})

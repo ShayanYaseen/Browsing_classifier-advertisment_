@@ -7,6 +7,6 @@ urlpatterns = [
     path('ad/', views.ad, name='chart-ad'),
     path('detailed/', views.detailed, name='chart-detailed'),
     path('history/', views.history, name='chart-history'),
-    path('time/', views.time, name='chart-time'),
+    path('productive/', views.productive, name='chart-productive'),
     path('visit/', views.visit, name='chart-visit'),
 ]

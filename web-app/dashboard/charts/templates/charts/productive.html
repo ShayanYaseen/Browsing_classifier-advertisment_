@@ -1,19 +1,35 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Stastics Page</title>
+    <title>Productivity</title>
     <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min_static_page.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css">
-
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    
+    
+    <script>
+        function clickCounter() {
+            if (typeof (Storage) !== "undefined") {
+                if (localStorage.clickcount) {
+                    localStorage.clickcount = (Number(localStorage.clickcount) + 1) % 2;
+                } else {
+                    localStorage.clickcount = 1;
+                }
+                if (localStorage.clickcount == 1) {
+                    greeting = "Productive";
+                } else {
+                    greeting = "Not Productive";
+                }
+                document.getElementById("result").innerHTML = "This Was a " + greeting + " Site";
+            } else {
+                document.getElementById("result").innerHTML = "Sorry, your browser does not support web storage...";
+            }
+        }
+    </script>
 </head>
-
 <body>
     <nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-white portfolio-navbar gradient">
         <div class="container"><a class="navbar-brand logo" href="#">History Statistics and Client Based Advertisement
@@ -22,11 +38,14 @@
             <div class="collapse navbar-collapse" id="navbarNav"></div>
         </div>
     </nav>
-    <div>
-        <div style="position:relative; left:10px; top:100px; background-color:lightblue;">
-            <embed src="/static/data/visit.htm" height=1000 width=1000>
-        </div>
-    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <p><button onclick="clickCounter()" type="button">Was This Site Productive</button></p>
+    <div id="result"></div>
+    
     <footer class="page-footer">
         <div class="container">
             <div class="links"><a href="#">About</a></div>
@@ -37,5 +56,4 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
     <script src="/static/js/theme_static_page.js"></script>
 </body>
-
 </html>

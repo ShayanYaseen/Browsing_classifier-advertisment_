@@ -84,8 +84,7 @@ for i in last_visit_update:
     ads_cur.execute("SELECT * FROM title WHERE id =?",(i[0],))
     # print(ads_cur.fetchall())
 ads.commit()
-
-
+'''
 curr_direct = str(pathlib.Path(__file__).parent.absolute()) # get name of current directory
 web_dest = curr_direct[:-3] + "/web-app/dashboard/static/data/"
 
@@ -93,6 +92,6 @@ import pandas as pd
 ads = sqlite3.connect('ads')
 db_df = pd.read_sql_query("SELECT url,title,category FROM title", ads)
 db_df.to_html(web_dest+'ad.htm', justify='left', render_links=True)
-
+'''
 
 ads.close()

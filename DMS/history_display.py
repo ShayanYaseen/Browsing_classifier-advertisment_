@@ -42,8 +42,15 @@ web_dest = curr_direct[:-3] + "/web-app/dashboard/static/data/"
 #storing data for web app
 db_df = pd.read_sql_query("SELECT url, title, visit_count, datetime((last_visit_time/1000000)-11644473600, 'unixepoch', 'localtime') AS last_visit_time FROM url ORDER BY last_visit_time DESC", local_con)
 db_df.to_html(web_dest+'history.htm',justify='left', render_links=True)
+
 db_df = pd.read_sql_query("SELECT url,visit_count from url ORDER BY visit_count DESC LIMIT 10", local_con)
-db_df.to_html(web_dest+'visit.htm', justify='left', render_links=True)
+db_df.to_html(web_dest+'visit.htm')
+
+ad_con = sqlite3.connect('ads')
+db_df = pd.read_sql_query("SELECT category,title from title", ad_con)
+db_df.to_html(web_dest+'ad.htm', justify='left', render_links=True)
+
+
 
 
 local_con.commit()
