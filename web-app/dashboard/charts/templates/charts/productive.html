@@ -1,17 +1,15 @@
-{% extends "charts/common.html" %}
-
 {% load static %}
+<!DOCTYPE html>
 <html>
-
-
-
-
-{% block content %}
-    <script src="/static/js/jquery.min_static_page.js"></script>
-    <script src="/static/bootstrap/js/bootstrap.min_static_page.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
-    <script src="/static/js/theme_static_page.js"></script>
-
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Productivity</title>
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min_static_page.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css">
+    
+    
     <script>
         function clickCounter() {
             if (typeof (Storage) !== "undefined") {
@@ -31,11 +29,31 @@
             }
         }
     </script>
-
+</head>
+<body>
+    <nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-white portfolio-navbar gradient">
+        <div class="container"><a class="navbar-brand logo" href="#">History Statistics and Client Based Advertisement
+                System</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navbarNav"><span
+                    class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarNav"></div>
+        </div>
+    </nav>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
     <p><button onclick="clickCounter()" type="button">Was This Site Productive</button></p>
     <div id="result"></div>
-
-
-{% endblock %}
-
+    
+    <footer class="page-footer">
+        <div class="container">
+            <div class="links"><a href="#">About</a></div>
+        </div>
+    </footer>
+    <script src="/static/js/jquery.min_static_page.js"></script>
+    <script src="/static/bootstrap/js/bootstrap.min_static_page.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
+    <script src="/static/js/theme_static_page.js"></script>
+</body>
 </html>

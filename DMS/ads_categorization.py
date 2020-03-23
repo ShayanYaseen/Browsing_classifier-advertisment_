@@ -1,3 +1,5 @@
+import pandas as pd
+import pickle
 import os
 import sqlite3
 import shutil
@@ -21,11 +23,11 @@ ads_cur = ads.cursor()
 ads_cur.execute("ATTACH DATABASE 'local' AS local;")
 ads_cur.execute("CREATE TABLE IF NOT EXISTS title(id INTEGER PRIMARY KEY AUTOINCREMENT,url LONGVARCHAR,title LONGVARCHAR,last_visit_time INTEGER NOT NULL,category LONG VARCHAR)")
 ads_cur.execute("SELECT id,last_visit_time FROM title")
-ids  = ads_cur.fetchall()
+ids = ads_cur.fetchall()
 # print(ids)
 time_stamp = 0
 for i in range(len(ids)):
-    if ids[i][1]>time_stamp:
+    if ids[i][1] > time_stamp:
         time_stamp = ids[i][1]
     ids[i] = ids[i][0]
 
@@ -35,7 +37,7 @@ new_entries = []
 last_visit_update = []
 for i in results:
     if i[0] in ids:
-        if i[3]>time_stamp:
+        if i[3] > time_stamp:
             last_visit_update.append(i)
     else:
         new_entries.append(i)
@@ -44,12 +46,12 @@ for i in results:
 # print(last_visit_update,'\n', len(last_visit_update))
 
 
-curr_direct = str(pathlib.Path(__file__).parent.absolute()) # get name of current directory
+curr_direct = str(pathlib.Path(__file__).parent.absolute()
+                  )  # get name of current directory
 curr_direct = curr_direct[:-3]
 curr_direct += 'ML MODEL/Pickle_MNB_Model.pkl'
 
 # print(curr_direct)
-import pickle
 # import sklearn
 # Load the Model back from file
 with open(curr_direct, 'rb') as file:
@@ -61,37 +63,33 @@ with open(curr_direct, 'rb') as file:
 # Calculate the accuracy score and predict target values
 
 for i in new_entries:
-    X_test = [i[2],]
+    X_test = [i[2], ]
 
     # Predict the Labels using the reloaded Model
     Y_pred = Pickled_MNB_Model.predict(X_test)
     Y_pred = str(Y_pred[0])
     i.append(Y_pred)
     # print(Y_pred)
-    ads_cur.execute('INSERT INTO title VALUES (?,?,?,?,?)',i)
-
-
-
-
-
+    ads_cur.execute('INSERT INTO title VALUES (?,?,?,?,?)', i)
 
 
 
 for i in last_visit_update:
     ads_cur.execute("SELECT * FROM title WHERE id=?", (i[0],))
     # print(ads_cur.fetchall())
-    ads_cur.execute("UPDATE title SET last_visit_time =? WHERE id=?",(i[3],i[0]))
-    ads_cur.execute("SELECT * FROM title WHERE id =?",(i[0],))
+    ads_cur.execute(
+        "UPDATE title SET last_visit_time =? WHERE id=?", (i[3], i[0]))
+    ads_cur.execute("SELECT * FROM title WHERE id =?", (i[0],))
     # print(ads_cur.fetchall())
 ads.commit()
 
-curr_direct = str(pathlib.Path(__file__).parent.absolute()) # get name of current directory
-web_dest = curr_direct[:-3] + "/web-app/dashboard/static/data/"
+curr_direct = str(pathlib.Path(__file__).parent.absolute()
+                  )  # get name of current directory
+web_dest = curr_direct[:-3] + "/web-app/dashboard/charts/templates/charts/"
 
-import pandas as pd
 ads = sqlite3.connect('ads')
 db_df = pd.read_sql_query("SELECT url,title,category FROM title", ads)
 pd.set_option('display.max_colwidth', 100)
-db_df.to_html(web_dest+'ad.htm', justify='left', render_links=True)
+db_df.to_csv(web_dest+'ad.csv')
 
 ads.close()
