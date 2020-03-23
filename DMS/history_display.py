@@ -41,7 +41,7 @@ local_cur.execute("CREATE TABLE IF NOT EXISTS url(id INTEGER PRIMARY KEY AUTOINC
 local_cur.execute(
     "INSERT INTO url SELECT id,url,title,visit_count,last_visit_time FROM history.urls")
 
-web_dest = curr_direct[:-3] + "/web-app/dashboard/charts/templates/charts/"
+web_dest = curr_direct[:-3] + "/web-app/dashboard/static/data/"
 
 #storing data for web app
 db_df = pd.read_sql_query(

@@ -85,7 +85,7 @@ ads.commit()
 
 curr_direct = str(pathlib.Path(__file__).parent.absolute()
                   )  # get name of current directory
-web_dest = curr_direct[:-3] + "/web-app/dashboard/charts/templates/charts/"
+web_dest = curr_direct[:-3] + "/web-app/dashboard/static/data/"
 
 ads = sqlite3.connect('ads')
 db_df = pd.read_sql_query("SELECT url,title,category FROM title", ads)
