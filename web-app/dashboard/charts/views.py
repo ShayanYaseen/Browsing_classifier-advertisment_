@@ -29,7 +29,7 @@ def visit(request):
 
 def productive(request):
     return render(request, 'charts/productive.html', {'title': 'productive'})
-    
+
 def common(request):
     return render(request, 'charts/common.html', {'title': 'common'})
 
