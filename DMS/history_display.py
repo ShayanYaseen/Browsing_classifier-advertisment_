@@ -41,14 +41,37 @@ web_dest = curr_direct[:-3] + "/web-app/dashboard/static/data/"
 
 #storing data for web app
 db_df = pd.read_sql_query("SELECT url, title, visit_count, datetime((last_visit_time/1000000)-11644473600, 'unixepoch', 'localtime') AS last_visit_time FROM url ORDER BY last_visit_time DESC", local_con)
+pd.set_option('display.max_colwidth',100)
 db_df.to_html(web_dest+'history.htm',justify='left', render_links=True)
 
 db_df = pd.read_sql_query("SELECT url,visit_count from url ORDER BY visit_count DESC LIMIT 10", local_con)
-db_df.to_html(web_dest+'visit.htm')
 
-ad_con = sqlite3.connect('ads')
-db_df = pd.read_sql_query("SELECT category,title from title", ad_con)
-db_df.to_html(web_dest+'ad.htm', justify='left', render_links=True)
+# Stats for top 10 sites
+import plotly.express as px
+import plotly
+fig = px.pie(db_df, values="visit_count", names="url",
+             title="Most visited websites", hover_data=['visit_count'],
+             labels={'url':'url'} )
+fig.update_traces(textposition='inside', textinfo='percent+label')
+fig_loc = curr_direct[:-3] + "/web-app/dashboard/charts/templates/charts/"
+plotly.offline.plot(fig, filename=fig_loc+'pie.html', auto_open=False)
+
+
+fig = px.bar(db_df, x='url', y='visit_count',
+             hover_data=['url', 'visit_count'], color='visit_count',
+             labels={'bar':'Most visited sites'}, height=600)
+plotly.offline.plot(fig, filename=fig_loc+'bar.html', auto_open=False)
+
+
+
+
+
+
+db_df.to_html(web_dest+'visit.htm',justify='left', render_links=True)
+
+# ad_con = sqlite3.connect('ads')
+# db_df = pd.read_sql_query("SELECT category,title from title", ad_con)
+# db_df.to_html(web_dest+'ad.htm', justify='left', render_links=True)
 
 
 

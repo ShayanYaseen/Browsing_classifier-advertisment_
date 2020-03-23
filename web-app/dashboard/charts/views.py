@@ -29,3 +29,12 @@ def visit(request):
 
 def productive(request):
     return render(request, 'charts/productive.html', {'title': 'productive'})
+
+def common(request):
+    return render(request, 'charts/common.html', {'title': 'common'})
+
+def pie(request):
+    return render (request, 'charts/pie.html', {'title':'pie'})
+
+def bar(request):
+    return render(request, 'charts/bar.html', {'title':'bar-graph'})

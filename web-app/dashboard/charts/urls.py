@@ -9,4 +9,7 @@ urlpatterns = [
     path('history/', views.history, name='chart-history'),
     path('productive/', views.productive, name='chart-productive'),
     path('visit/', views.visit, name='chart-visit'),
+    path('common/', views.common, name='chart-common'),
+    path('pie/', views.pie, name='chart-pie'),
+    path('bar/', views.bar, name='chart-bar'),
 ]
