@@ -7,18 +7,22 @@
 </head>
 
 
-<body style="background-color:#ffffff">
+<body>
 
-    <nav>
+    <nav style="background-color:#073A99">
         <div class="nav-wrapper">
           <a href="{% url 'chart-home' %}" class="brand-logo center">Browsing Stats Web-App</a>
           <ul class="left hide-on-med-and-down">
+            <li><a href="{% url 'chart-home' %}">Home</a></li>
             <li><a href="{% url 'chart-history' %}">History</a></li>
             <li><a href="{% url 'chart-ad' %}">Ads Classification</a></li>
-            <li class="active"><a href="{% url 'chart-visit' %}">Most Visits</a></li>
+            <li><a href="{% url 'chart-visit' %}">Most Visits</a></li>
           </ul>
         </div>
     </nav>
+
+
+
 
 
     <div class="container">
@@ -29,7 +33,7 @@
     </div>
 
 
-        <footer class="page-footer">
+        <footer class="page-footer" style="background-color:#3949AB">
           <div class="container">
             <div class="row">
               <div class="col l6 s12">

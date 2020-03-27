@@ -57,14 +57,13 @@ fig = px.pie(db_df, values="visit_count", names="url",
              title="Most visited websites", hover_data=['visit_count'],
              labels={'url': 'url'})
 fig.update_traces(textposition='inside', textinfo='percent+label')
-fig_loc = curr_direct[:-3] + "/web-app/dashboard/charts/templates/charts/"
-plotly.offline.plot(fig, filename=fig_loc+'pie.html', auto_open=False)
+fig_loc = curr_direct[:-3] + "web-app/dashboard/static/data/"
+plotly.offline.plot(fig, filename=fig_loc+'pie_embed.html', auto_open=False)
 
 
 fig = px.bar(db_df, x='url', y='visit_count',
-             hover_data=['url', 'visit_count'], color='visit_count',
-             labels={'bar': 'Most visited sites'}, height=600)
-plotly.offline.plot(fig, filename=fig_loc+'bar.html', auto_open=False)
+             hover_data=['url', 'visit_count'], color='visit_count', height=600)
+plotly.offline.plot(fig, filename=fig_loc+'bar_embed.html', auto_open=False)
 
 db_df.to_csv(web_dest+'visit.csv')
 
