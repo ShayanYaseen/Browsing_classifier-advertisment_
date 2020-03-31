@@ -2,10 +2,6 @@
 
 {% load static %}
 <html>
-
-
-
-
 {% block content %}
     <script src="/static/js/jquery.min_static_page.js"></script>
     <script src="/static/bootstrap/js/bootstrap.min_static_page.js"></script>
@@ -31,9 +27,27 @@
             }
         }
     </script>
-
+    <div style="position: absolute; left:400px; top:100px">
+        <embed src="/static/data/prod_data.html" height=500 width=400>
+    </div>
+    <p><button onclick="clickCounter()" type="button"></button></p>
+    <div id="result" style="height:850 width:900" ></div>
+    <p><button onclick="clickCounter()" type="button">Was This Site Productive</button></p>
+    <div id="result" style="height:850 width:900"></div>
+    <p><button onclick="clickCounter()" type="button">Was This Site Productive</button></p>
+    <div id="result" style="height:850 width:900"></div>
     <p><button onclick="clickCounter()" type="button">Was This Site Productive</button></p>
     <div id="result" style="height:850 width:900" ></div>
+    <p><button onclick="clickCounter()" type="button">Was This Site Productive</button></p>
+    <div id="result" style="height:850 width:900"></div>
+    <p><button onclick="clickCounter()" type="button">Was This Site Productive</button></p>
+    <div id="result" style="height:850 width:900"></div>
+    <p><button onclick="clickCounter()" type="button">Was This Site Productive</button></p>
+    <div id="result" style="height:850 width:900"></div>
+    <p><button onclick="clickCounter()" type="button">Was This Site Productive</button></p>
+    <div id="result" style="height:850 width:900"></div>
+    <p><button onclick="clickCounter()" type="button">Was This Site Productive</button></p>
+    <div id="result" style="height:850 width:900"></div>
 
 
 {% endblock %}

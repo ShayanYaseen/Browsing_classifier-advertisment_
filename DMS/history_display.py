@@ -67,6 +67,9 @@ plotly.offline.plot(fig, filename=fig_loc+'bar_embed.html', auto_open=False)
 
 db_df.to_csv(web_dest+'visit.csv')
 
+db_df = pd.read_sql_query(
+    "SELECT url from url ORDER BY visit_count DESC LIMIT 10", local_con)
+db_df.to_html(web_dest+'prod_data.html')
 # ad_con = sqlite3.connect('ads')
 # db_df = pd.read_sql_query("SELECT category,title from title", ad_con)
 # db_df.to_html(web_dest+'ad.htm', justify='left', render_links=True)
