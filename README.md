@@ -7,8 +7,8 @@ To run this:
 3) After DMS script runs and executes a url (typically http://127.0.0.1:8000/) will appear.
 4) Click on that to run the web-app in chrome browser.
 
-![image](Project ScreenShots/1_startup.png)
-![image](Project ScreenShots/2_home.png)
-![image](Project ScreenShots/6_top10sites.png)
-![image](Project ScreenShots/9_bargraph.png)
+![image](Project_ScreenShots/1_startup.png)
+![image](Project_ScreenShots/2_home.png)
+![image](Project_ScreenShots/6_top10sites.png)
+![image](Project_ScreenShots/9_bargraph.png)
 
