@@ -1,5 +1,5 @@
 # Browsing_classifier-advertisment_
-Chrome HIstory Stastical Classifier and Client based advertisement model
+Chrome History Stastical Classifier and Client based advertisement model
 This information system is designed to run on a linux operating system.
 To run this:
 1) Open terminal in the Browsing_classifier-advertisment_ directory. (The application will itslef install all the requirements)
