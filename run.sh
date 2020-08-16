@@ -1,5 +1,5 @@
-#pip3 install csvtotable
-#pip3 install plotly
+pip3 install csvtotable
+pip3 install plotly
 curr_path=$PWD
 history_script="DMS/"
 web_app="web-app/dashboard/"
